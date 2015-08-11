@@ -41,12 +41,16 @@ def show_client_list(list):
 		print conn.getpeername()
 
 def login_request_handle(con,content_json):
-	print 'login request handle..............'
-	print 'user',content_json['username']
-	print 'pwd',content_json['password']
+	obj={}
 	user=User.login(content_json['username'],content_json['password'])
-	print user
-
+	if user == None:
+		obj['login_status']='fail'
+	else:
+		obj['login_status']='success'
+	print obj
+	data=json.dumps(obj)	
+	send_packet(con,0,2,data,len(data))
+	
 		
 def friend_list_request_handle(con,content_json):
 		print 'friend list request handle.........'

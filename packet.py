@@ -2,9 +2,6 @@ import os
 import struct
 import string
 
-#print struct.calcsize("BBi")
-#print struct.calcsize("iBB")
-
 def send_packet(con,uid,command,data,length):
 	start=0x13
 	end=0x86
@@ -28,7 +25,6 @@ def rcv_packet(con):
 		if len(data)==0:
 			print 'len of data is 0'
 			break;
-		print 'data=',repr(data)
 		start_token,=struct.unpack("B",data)
 		if start_token==0x13:
 			data=con.recv(4)
@@ -45,7 +41,3 @@ def rcv_packet(con):
 			print 'invalid start token'
 	return -1,-1,-1
 
-
-def parse_packet(packet):
-	print 'parse_packet'	
-#send_packet(1111,1,"hello",5)

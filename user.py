@@ -66,18 +66,16 @@ class User:
 			return
 		cursor=conn.cursor()
 		sql_query="select * from user where loginid=%d and password=%d"%(uid,password)
-		print sql_query
 		cursor.execute(sql_query)
 		for item in cursor:
 			username=item[1]
 			password=item[2]
-			print username,password
 			if username > 0:
-				print 'found user %d'%username
 				return User(username,password)
 			else:
 				return None
 	
+		conn.close()
 		
 def main():
 	print 'user main'
