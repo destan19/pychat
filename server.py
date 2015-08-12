@@ -53,7 +53,31 @@ def login_request_handle(con,content_json):
 	
 		
 def friend_list_request_handle(con,content_json):
-		print 'friend list request handle.........'
+	obj={}
+	friend_list=[]
+	num=0
+	user=User(content_json['uid'])
+	friend_list=user.get_friend_list()
+	friend_obj={}
+	obj['list']=[]
+	for i,friend_id in enumerate(friend_list):		
+		num+=1
+		friend=User(friend_id)
+		friend_obj['loginid']=friend.loginid
+		friend_obj['nickname']=friend.nickname
+		friend_obj['address']=friend.address
+		friend_obj['phone_num']=friend.phone_num
+		friend_obj['sex']=friend.sex
+		friend_obj['signature']=friend.signature
+		friend_obj['mail']=friend.mail
+		friend_obj['online']=friend.online
+		friend_obj['age']=friend.age
+		obj['list'].append(friend_obj)
+	obj['friend_num']=num
+	data=json.dumps(obj,indent=4)
+	print data
+	send_packet(con,0,4,data,len(data))
+		
 
 def thread_msg_handle(con):
 	handle={
@@ -80,8 +104,6 @@ if __name__ == "__main__":
 	while 1:
 		conn,addr=server.accept()
 		client_list.append(conn)
-#		print dir(conn)
-		#print client_list
 		print "client  connected.",conn.getpeername()
 		show_client_list(client_list)
 		thread.start_new_thread(thread_msg_handle,(conn,))
