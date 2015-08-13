@@ -14,6 +14,12 @@ def send_packet(con,uid,command,data,length):
 		print 'send packet error'
 		return 0
 	return 1
+def wrap_packet(con,uid,command,data,length):
+	start=0x13
+	end=0x86
+	format_str="=BiBi%dsB" %length
+	packet=struct.pack(format_str,start,length+6,command,uid,data,end)
+	return packet
 
 def rcv_packet(con):
 	while 1:
