@@ -17,7 +17,10 @@ host="127.0.0.1"
 port=80
 server=None
 client_list=[]
+outputs=[]
 
+mq={}
+user_dict={}
 def load_conf():
 	cp=ConfigParser.ConfigParser()
 	cp.read("server.conf")
@@ -44,13 +47,16 @@ def show_client_list(list):
 		print conn.getpeername()
 
 def login_request_handle(con,content_json):
+	global user_dict
 	obj={}
 	user=User.login(content_json['username'],content_json['password'])
 	if user == None:
 		obj['login_status']='fail'
 	else:
 		obj['login_status']='success'
+		user_dict[user.loginid]=con
 	print obj
+	print 'user dict=',user_dict	
 	data=json.dumps(obj)	
 	packet=wrap_packet(con,0,2,data,len(data))
 	return packet
@@ -85,58 +91,72 @@ def friend_list_request_handle(con,content_json):
 	packet=wrap_packet(con,0,4,data,len(data))
 	return packet
 		
+def heart_request_handle(con,content_json):
+	obj={}
+	user=User(conten_json['uid'])
+
+def show_mq():
+	print '=============================================='
+	global mq
+	for con in mq:
+		print con.getpeername()	,'msg num:%d'%mq[con].qsize()
+def chat_msg_handle(con,content_json):
+	obj={}
+	res_obj={}
+	f_con=None
+	global user_dict
+	global mq
+	global outputs
+	uid=content_json['uid']
+	fid=content_json['fid']
+	msg=content_json['msg']
+	obj['send_id']=uid
+	obj['rcv_id']=fid
+	obj['msg']=msg
+	data=json.dumps(obj,indent=4)
+	if user_dict.has_key(fid):
+		f_con=user_dict[fid]
+		print 'found friend id in user dict',fid
+	if f_con is None:
+		res_obj['status']='fail'
+		res_obj['reson']='friend is not online'
+	else:
+		msg_packet=wrap_packet(f_con,0,22,data,len(data))	
+		mq[f_con].put(msg_packet)
+		if f_con not in outputs:
+			outputs.append(f_con)
+		res_obj['status']='success'
+	res_data=json.dumps(res_obj,indent=4)
+	res_packet=wrap_packet(con,0,21,res_data,len(res_data))
+	return res_packet
+	
 def rcv_and_handle_msg(con):
 	handle={
 		1:login_request_handle,
-		3:friend_list_request_handle
+		3:friend_list_request_handle,
+		20:chat_msg_handle
 	}
 	command,content,content_len=rcv_packet(con)
 	print 'command=%d,content=%s,content_len=%d'%(command,content,content_len)
 
 	if content_len == -1:
 		print 'client is offline'
-		con.close()
+		return None
 	content_json=json.loads(content)
 	return handle.get(command)(con,content_json)
-'''
-def thread_msg_handle(con):
-	handle={
-		1:login_request_handle,
-		3:friend_list_request_handle
-	}
-	command,content,content_len=rcv_packet(con)
-	print 'command=%d,content=%s,content_len=%d'%(command,content,content_len)
 
-	if content_len == -1:
-		print 'client is offline'
-		con.close()
-	content_json=json.loads(content)
-	handle.get(command)(con,content_json)
-	#con.close()
-'''
-'''	
-def main():
-	load_conf()	
-	init_server(host,port)
-	while 1:
-		conn,addr=server.accept()
-		client_list.append(conn)
-		print "client  connected.",conn.getpeername()
-		show_client_list(client_list)
-		thread.start_new_thread(thread_msg_handle,(conn,))
-'''
 def main():
 	load_conf()	
 	init_server(host,port)
 	inputs=[server]
-	outputs=[]
+	global outputs
+	global user_dict
 	timeout=20
-	mq={}
+	global	mq
 	while 1:
 		ra,wa,ex=select.select(inputs, outputs, inputs, timeout)
-		if not (ra or wa or ex):
-			print 'time out'
-			break;
+#		if not (ra or wa or ex):
+#			print 'time out'
 		for s in ra:
 			if s is server:
 				conn,addr=server.accept()
@@ -153,9 +173,10 @@ def main():
 				else:
 					if s in outputs:
 						outputs.remove(s)
+						print '##add client',s.getpeername()
 					inputs.remove(s)
-					s.close()
 					del mq[s]
+					s.close()
 		for s in wa:
 			try:
 				msg=mq[s].get_nowait()
@@ -163,9 +184,16 @@ def main():
 				print s.getpeername(),'queue empty'
 				outputs.remove(s)
 			else:
+				print '###########send ',repr(msg)
 				s.send(msg)
+		for s in ex:
+			print 'exception on',s.getpeername()
+			inputs.remove(s)
+			if s in outputs:
+				outputs.remove(s)
+			s.close()
+			del mq[s]
 
 if __name__ == "__main__":
 	main()
 
-	

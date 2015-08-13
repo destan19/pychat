@@ -119,7 +119,7 @@ class User:
 			username=item[1]
 			password=item[2]
 			if username > 0:
-				return User(username,password)
+				return User(username)
 			else:
 				return None
 		conn.close()
