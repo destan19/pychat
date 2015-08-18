@@ -6,6 +6,7 @@ import sys
 import json
 from packet import send_packet
 from packet import rcv_packet
+from friend import Friend
 HOST='192.168.17.134'
 PORT=80
 class Client:
@@ -37,22 +38,35 @@ class Client:
 				print 'login fail.............'
 				return 0
 	
-	def friend_list_request(self):
+	def get_friend_by_uid(self):
+		for i,value in enumerate(self.client.get_friend_list()['list']):
+			if friend_uid == value['loginid']:
+				friend=value
+				break
+	
+	def update_friend_list(self):
 		obj={}
 		obj['uid']=self.uid
+		self.friend_list=[]
 		data=json.dumps(obj)
 		send_packet(self.con,self.uid,3,data,len(data));
 		command,content,content_len=rcv_packet(self.con)
-	
+		
 		if content_len == -1:
 			print 'connect server error.'
-			return 0
-		if len(content)==0:
-			return 0
+			return -1
 		else:
 			content_json=json.loads(content)
+			self.friend_num=content_json['friend_num']
+			for f in content_json['list']:
+				friend=Friend(f['loginid'],f['nickname'],f['address'],f['phone_num'],
+				f['sex'],f['signature'],f['mail'],f['online'],f['age'])
+				self.friend_list.append(friend);
 			return content_json
-
+		
+	def get_friend_list(self):
+		return self.friend_list
+		
 	def send_msg_to_friend(self,con,uid,fid,msg):
 		obj={}
 		obj['uid']=uid

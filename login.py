@@ -3,6 +3,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PyQt4 import *
 from client import Client
+from chat import ChatDialog
 import sys
 import string
 import login_ui

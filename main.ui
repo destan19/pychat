@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>245</width>
+    <width>232</width>
     <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QListView" name="friend_listview">
+  <widget class="QListWidget" name="friend_listview">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>30</y>
-     <width>256</width>
-     <height>421</height>
+     <x>10</x>
+     <y>60</y>
+     <width>211</width>
+     <height>391</height>
     </rect>
    </property>
   </widget>

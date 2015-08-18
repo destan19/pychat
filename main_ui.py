@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Fri Aug 14 01:23:47 2015
+# Created: Mon Aug 17 19:49:16 2015
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,9 +26,9 @@ except AttributeError:
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(245, 525)
-        self.friend_listview = QtGui.QListView(Dialog)
-        self.friend_listview.setGeometry(QtCore.QRect(0, 30, 256, 421))
+        Dialog.resize(232, 525)
+        self.friend_listview = QtGui.QListWidget(Dialog)
+        self.friend_listview.setGeometry(QtCore.QRect(10, 60, 211, 391))
         self.friend_listview.setObjectName(_fromUtf8("friend_listview"))
 
         self.retranslateUi(Dialog)
