@@ -13,6 +13,7 @@ from user import User
 from packet import send_packet
 from packet import rcv_packet
 from packet import wrap_packet
+import base64
 host="127.0.0.1"
 port=80
 server=None
@@ -129,12 +130,30 @@ def chat_msg_handle(con,content_json):
 	res_data=json.dumps(res_obj,indent=4)
 	res_packet=wrap_packet(con,0,21,res_data,len(res_data))
 	return res_packet
+
+def upload_user_image(con,content_json):
+	obj={}
+	res_obj={}
+	f_con=None
+	uid=content_json['uid']
+	img_data=content_json['img']
+	fd = open("%d.png"%uid,"wb")
+	decoded_img_data=base64.b64decode(img_data)
+	fd.write(decoded_img_data)
+	fd.close()
+
+	res_obj['status']='success'
+	res_data=json.dumps(res_obj,indent=4)
+	res_packet=wrap_packet(con,0,6,res_data,len(res_data))
+	return res_packet
 	
 def rcv_and_handle_msg(con):
 	handle={
 		1:login_request_handle,
 		3:friend_list_request_handle,
+		5:upload_user_image,
 		20:chat_msg_handle
+		
 	}
 	command,content,content_len=rcv_packet(con)
 	print 'command=%d,content=%s,content_len=%d'%(command,content,content_len)

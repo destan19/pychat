@@ -4,6 +4,7 @@ import string
 import thread
 import sys
 import json
+import base64
 from packet import send_packet
 from packet import rcv_packet
 HOST='192.168.17.134'
@@ -42,6 +43,31 @@ def friend_list_request(con,uid):
 		print 'connect server error.'
 		return 0
 	if command!=3 or len(content)==0:
+		return 0
+	else:
+		content_json=json.loads(content)
+		print content_json
+
+def upload_user_image(con,uid):
+	obj={}
+	obj['uid']=uid
+	fd=open("111.png","rb")
+	img_data=fd.read()
+	encoded_img_data=base64.b64encode(img_data)
+	obj['img']=encoded_img_data
+
+	fd.close()
+
+	data=json.dumps(obj)
+	print data
+	send_packet(con,uid,5,data,len(data));
+	command,content,content_len=rcv_packet(con)
+	print content
+	if content_len == -1:
+		print 'connect server error.'
+		return 0
+	if command != 6 or len(content)==0:
+		print 'command error'
 		return 0
 	else:
 		content_json=json.loads(content)
@@ -95,6 +121,7 @@ def main():
 	s.connect((HOST,PORT))
 	login(s,uid,123456)	
 	friend_list_request(s,uid)
+	upload_user_image(s,uid)
 	
 	rcv_thread=thread.start_new_thread(thread_rcv_msg,(s,uid))
 	send_thread=thread.start_new_thread(thread_send_msg,(s,uid))
