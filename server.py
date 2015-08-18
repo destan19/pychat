@@ -130,28 +130,58 @@ def chat_msg_handle(con,content_json):
 	res_data=json.dumps(res_obj,indent=4)
 	res_packet=wrap_packet(con,0,21,res_data,len(res_data))
 	return res_packet
-
-def upload_user_image(con,content_json):
+	
+def upload_user_image_handle(con,content_json):
 	obj={}
 	res_obj={}
-	f_con=None
 	uid=content_json['uid']
 	img_data=content_json['img']
-	fd = open("%d.png"%uid,"wb")
+	fd = open("images/%d.png"%uid,"wb")
 	decoded_img_data=base64.b64decode(img_data)
 	fd.write(decoded_img_data)
 	fd.close()
-
 	res_obj['status']='success'
 	res_data=json.dumps(res_obj,indent=4)
 	res_packet=wrap_packet(con,0,6,res_data,len(res_data))
+	return res_packet
+	
+def user_image_request_handle (con,content_json):
+	obj={}
+	res_obj={}
+	uid=content_json['uid']
+	fd = open("images/%d.png"%uid,"rb")
+	img_data=fd.read()
+	encoded_img_data=base64.b64encode(img_data)
+	fd.close()
+	res_obj['img']=encoded_img_data
+	res_data=json.dumps(res_obj,indent=4)
+	res_packet=wrap_packet(con,0,8,res_data,len(res_data))
+	return res_packet
+def	user_info_request_handle(con,content_json):
+	obj={}
+	res_obj={}
+	uid=content_json['uid']
+	user=User(uid)
+	res_obj['loginid']=user.loginid
+	res_obj['nickname']=user.nickname
+	res_obj['address']=user.address
+	res_obj['phone_num']=user.phone_num
+	res_obj['sex']=user.sex
+	res_obj['signature']=user.signature
+	res_obj['mail']=user.mail
+	res_obj['online']=user.online
+	res_obj['age']=user.age
+	res_data=json.dumps(res_obj,indent=4)
+	res_packet=wrap_packet(con,0,10,res_data,len(res_data))
 	return res_packet
 	
 def rcv_and_handle_msg(con):
 	handle={
 		1:login_request_handle,
 		3:friend_list_request_handle,
-		5:upload_user_image,
+		5:upload_user_image_handle,
+		7:user_image_request_handle,
+		9:user_info_request_handle,
 		20:chat_msg_handle
 		
 	}

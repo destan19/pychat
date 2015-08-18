@@ -63,7 +63,21 @@ class Client:
 				f['sex'],f['signature'],f['mail'],f['online'],f['age'])
 				self.friend_list.append(friend);
 			return content_json
+			
+	def get_user_info(self):
+		obj={}
+		obj['uid']=self.uid
+		data=json.dumps(obj)
+		send_packet(self.con,self.uid,9,data,len(data));
+		command,content,content_len=rcv_packet(self.con)
 		
+		if content_len == -1:
+			print 'connect server error.'
+			return -1
+		else:
+			content_json=json.loads(content)
+			return content_json		
+			
 	def get_friend_list(self):
 		return self.friend_list
 		

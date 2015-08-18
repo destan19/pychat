@@ -15,8 +15,13 @@ class MainDialog(QDialog,main_ui.Ui_Dialog):
 		mu=main_ui.Ui_Dialog()
 		self.setupUi(self)
 		self.client=cli
+		
 		self.init_friend_list_view()
-	
+		user_info=self.client.get_user_info()
+		self.nickname_label.setText(user_info['nickname'])
+		self.sig_label.setText(user_info['signature'])
+		self.user_image_label.setPixmap(QtGui.QPixmap('111.png'))
+		
 	def init_friend_list_view(self):
 		self.client.update_friend_list()
 		friend_list=self.client.get_friend_list()

@@ -73,6 +73,28 @@ def upload_user_image(con,uid):
 		content_json=json.loads(content)
 		print content_json
 
+def get_user_image(con,uid):
+	obj={}
+	obj['uid']=uid
+	data=json.dumps(obj)
+	send_packet(con,uid,7,data,len(data));
+	command,content,content_len=rcv_packet(con)
+
+	if content_len == -1:
+		print 'connect server error.'
+		return 0
+		
+	if command !=8 or len(content)==0:
+		return 0
+	else:
+		content_json=json.loads(content)
+		decoded_img_data=base64.b64decode(content_json['img'])
+		#for debug
+		fd = open("clients/%d.png"%uid,"wb")
+		fd.write(decoded_img_data)
+		fd.close()
+		return decoded_img_data;
+		
 def send_msg_to_friend(con,uid,fid,msg):
 	obj={}
 	obj['uid']=uid
@@ -105,6 +127,7 @@ def thread_send_msg(con,uid):
 			print 'msg:',
 			msg=raw_input()
 		send_msg_to_friend(con,uid,fid,msg)
+		
 def connect_to_server():
 	s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	s.connect((HOST,PORT))
@@ -121,8 +144,10 @@ def main():
 	s.connect((HOST,PORT))
 	login(s,uid,123456)	
 	friend_list_request(s,uid)
-	upload_user_image(s,uid)
-	
+	#upload_user_image(s,uid)
+	get_user_image(s,uid)
+	s.close()
+	return
 	rcv_thread=thread.start_new_thread(thread_rcv_msg,(s,uid))
 	send_thread=thread.start_new_thread(thread_send_msg,(s,uid))
 	while(1) :
