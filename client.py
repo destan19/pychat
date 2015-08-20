@@ -96,13 +96,23 @@ class Client:
 		else:
 			content_json=json.loads(content)
 			print content_json
-		
+
 
 	def connect_to_server(self,host,port):
-		s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-		s.connect((host,port))
+		try:
+			s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+			try:
+				s.connect((host,port))
+			except socket.error as e:
+				print e
+				s.close()
+				return 0
+		except socket.error as e:
+			print e
+			s=None
+			return 0
 		self.con = s
-		return s
+		return 1
 		
 def thread_rcv_msg(con,uid):
 	while(1):
