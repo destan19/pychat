@@ -3,7 +3,7 @@
 /**
 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|s| 长度  |C| uid   | 内容...                           e
+|s| len |C| uid   | content...                           e
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 */
 
@@ -26,7 +26,7 @@ public class Packet{
 	byte[] getByteData() {
 		int p = 0;
 		byte []int_bytes= new byte[4];
-		byte []byte_data = new byte[this.len+5]; //包含start和len 
+		byte []byte_data = new byte[this.len+5]; 
 		byte_data[p] = start;
 		p += 1;
 		int_bytes= ByteUtil.int2Byte(this.len);
