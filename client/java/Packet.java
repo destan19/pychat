@@ -29,14 +29,14 @@ public class Packet{
 		byte []byte_data = new byte[this.len+5]; 
 		byte_data[p] = start;
 		p += 1;
-		int_bytes= ByteUtil.int2Byte(this.len);
+		int_bytes= ByteUtil.int2Byte(this.len,ByteUtil.BIG_ENDIAN);
 		ByteUtil.showData(byte_data);
 		System.arraycopy( int_bytes, 0, byte_data, p, 4);
 		ByteUtil.showData(byte_data);
 		p += 4;
 		byte_data[p] = this.cmd;
 		p+=1;
-		int_bytes= ByteUtil.int2Byte(this.uid);
+		int_bytes= ByteUtil.int2Byte(this.uid,ByteUtil.BIG_ENDIAN);
 		System.arraycopy( int_bytes, 0, byte_data, p, 4);
 		p+=4;
 		System.arraycopy(this.data.getBytes(),0,byte_data, p, this.len - 6);
@@ -46,13 +46,6 @@ public class Packet{
 		return byte_data;
 	}
 	
-	public static void main(String []args) {
-		byte a=1;
-		String str=new String("12345");
-		byte []str2 = str.getBytes();
-		System.out.println("a="+a+" "+ str2);
-		Packet packet=new Packet(5,(byte)1,111,"12345");
-		packet.getByteData();
-	}
+
 }
 

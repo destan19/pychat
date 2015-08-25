@@ -31,11 +31,15 @@ def rcv_packet(con):
 		if len(data)==0:
 			print 'len of data is 0'
 			break;
+
 		start_token,=struct.unpack("B",data)
 		if start_token==0x13:
 			data=con.recv(4)
+			print 'data=',repr(data)
 			length,=struct.unpack("i",data)
+			print 'len=',length
 			data=con.recv(length)
+			print "data",repr(data)
 			content_len=length-6
 			format_str="=Bi%dsB"%content_len
 			command,uid,content,end_token=struct.unpack(format_str,data)

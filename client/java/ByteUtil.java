@@ -1,12 +1,17 @@
 public class ByteUtil {
-
-    public static byte[] int2Byte(int intValue) {
+	static int LITTLE_ENDIAN = 0;
+	static int BIG_ENDIAN = 1;
+    public static byte[] int2Byte(int intValue,int endian) {
         byte[] b = new byte[4];
         for (int i = 0; i < 4; i++) {
             b[i] = (byte) (intValue >> 8 * (3 - i) & 0xFF);
-            //System.out.print(Integer.toBinaryString(b[i])+" ");
-            //System.out.print((b[i] & 0xFF) + " ");
         }
+		if (BIG_ENDIAN == endian) {
+			byte[] b2 = new byte[4];
+			for (int i = 0;i < 4;i++)
+				b2[3-i] = b[i];
+			return b2;
+		}
         return b;
     }
     public static int byte2Int(byte[] b) {
