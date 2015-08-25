@@ -32,7 +32,7 @@ def load_conf():
 #	server_opts=cp.options('server');
 	c_host=cp.get("server","host")
 	c_port=cp.get("server","port")
-	global host,g_port
+	global host,port
 	host=c_host
 	port=string.atoi(c_port)
 
