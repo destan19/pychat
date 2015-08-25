@@ -21,6 +21,15 @@ public class ByteUtil {
         }
         return intValue;
     }
+	public   static  int convertEndian(int  n) {  
+	  byte [] b =  new   byte [ 4 ];  
+	  b[0 ] = ( byte ) (n &  0xff );  
+	  b[1 ] = ( byte ) (n >>  8  &  0xff );  
+	  b[2 ] = ( byte ) (n >>  16  &  0xff );  
+	  b[3 ] = ( byte ) (n >>  24  &  0xff );  
+		return  byte2Int(b);
+	}  
+	
 	public static byte[] bytes2Bytes(byte[] b1,byte[] b2){
 		byte[] ret = new byte[b1.length+b2.length];
 		System.arraycopy(b1, 0, ret, 0, b1.length);
