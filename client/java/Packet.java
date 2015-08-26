@@ -30,9 +30,7 @@ public class Packet{
 		byte_data[p] = start;
 		p += 1;
 		int_bytes= ByteUtil.int2Byte(this.len,ByteUtil.BIG_ENDIAN);
-		ByteUtil.showData(byte_data);
 		System.arraycopy( int_bytes, 0, byte_data, p, 4);
-		ByteUtil.showData(byte_data);
 		p += 4;
 		byte_data[p] = this.cmd;
 		p+=1;

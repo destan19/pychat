@@ -35,10 +35,10 @@ public class Client {
 		byte a=1;
 		String str=new String("{\"username\":101,\"password\":123456}");
 		byte []str2 = str.getBytes();
-		System.out.println("send len:"+str.length());
 		Packet packet=new Packet(str.length(),(byte)1,512413455,str);
 		byte []send_data=packet.getByteData();
 		this.os.write(send_data);
+		NetHelper.rcv_packet(this.dis);
 		return 1;
 	}
 		
