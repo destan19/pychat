@@ -22,7 +22,9 @@ public class Packet{
 		this.uid = uid;
 		this.data = data;
 	}
-	
+	public String getData() {
+		return this.data;
+	}
 	byte[] getByteData() {
 		int p = 0;
 		byte []int_bytes= new byte[4];

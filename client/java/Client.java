@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
 /**
  * Created by derry on 2015/8/21.
  */
 public class Client {
+	final static byte LOGIN_REQUEST_CMD = 1;
+	
 	private String host = null;
 	private int port = 80;
 	private static Socket socket;
@@ -30,16 +33,43 @@ public class Client {
 		this.password = password;
 		System.out.println("construct a client.\n");
 	}
-	
+	/*
+		return:
+		0: 失败
+		1: 成功
+		-1:网络错误
+	*/
 	public int login() throws IOException{
-		byte a=1;
-		String str=new String("{\"username\":101,\"password\":123456}");
-		byte []str2 = str.getBytes();
-		Packet packet=new Packet(str.length(),(byte)1,512413455,str);
-		byte []send_data=packet.getByteData();
-		this.os.write(send_data);
-		NetHelper.rcv_packet(this.dis);
-		return 1;
+		int ret = 0;
+		String login_json_str = null;
+		JSONObject login_json = new JSONObject();
+		JSONObject resp_json = null;
+		login_json.put("username",this.uid);
+		login_json.put("password",this.password);
+		
+		login_json_str  = new String(login_json.toString());
+		System.out.println("login json="+login_json_str);
+		Packet login_packet=new Packet(login_json_str.length(),Client.LOGIN_REQUEST_CMD,this.uid,login_json_str);
+		ret = NetHelper.send_packet(this.os,login_packet);
+		if ( 0 == ret ) 
+			return 0;
+		
+		Packet resp_packet = NetHelper.rcv_packet(this.dis);
+		if ( null == resp_packet) {
+			return -1;
+		}
+		else {
+			resp_json = new JSONObject(resp_packet.getData());
+			if (resp_json.getString("login_status").equals("success")) {
+				System.out.println("login ............success.");
+				return 1;
+			}
+			else  {
+				System.out.println("login ............fail.");
+				return 0;
+			}
+		}
+		
 	}
 		
 	public int connect_to_server(String host,int port) throws IOException {
@@ -129,19 +159,40 @@ public class Client {
 		{
 			e.printStackTrace();
 		}
-		}
-	
-    public static void main(String []args) throws IOException {
-
-	Client client = new Client(101,123456);
-	client.connect_to_server("192.168.66.134",1088);
-	client.login();
-	
-	while(true) {
-		client.disconnect_server();
-		break;
-		
 	}
-   };
+	
+    public static void main(String []args) {
+
+		Client client = new Client(101,123456);
+		try {
+			client.connect_to_server("192.168.66.134",1088);
+		}
+		catch (IOException e) {
+			System.out.println("connect to server error.\n");
+			return;
+		}
+
+		try {
+			if  (!client.login()) 
+				return;
+			
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("network not ok.");
+			return;
+		}
+
+		while(true) {
+			try {
+				client.disconnect_server();
+				break;
+			}
+			catch (IOException e) {
+				break;
+			}
+			
+		}
+	};
 };
 
