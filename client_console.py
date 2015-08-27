@@ -7,8 +7,8 @@ import json
 import base64
 from packet import send_packet
 from packet import rcv_packet
-HOST='192.168.17.134'
-PORT=80
+HOST='192.168.66.134'
+PORT=1088
 
 def login(con,uid,password):
 	obj={}
@@ -145,9 +145,9 @@ def main():
 	login(s,uid,123456)	
 	friend_list_request(s,uid)
 	#upload_user_image(s,uid)
-	get_user_image(s,uid)
-	s.close()
-	return
+	#get_user_image(s,uid)
+	#s.close()
+	#return
 	rcv_thread=thread.start_new_thread(thread_rcv_msg,(s,uid))
 	send_thread=thread.start_new_thread(thread_send_msg,(s,uid))
 	while(1) :

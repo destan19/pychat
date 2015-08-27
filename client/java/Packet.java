@@ -45,7 +45,5 @@ public class Packet{
 		ByteUtil.showData(byte_data);
 		return byte_data;
 	}
-	
-
 }
 

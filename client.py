@@ -138,9 +138,8 @@ def main():
 	uid=string.atoi(sys.argv[1])
 	password=123456
 	client=Client(uid,password)
-	client.connect_to_server("192.168.17.134",80)
+	client.connect_to_server("192.168.66.134",1088)
 	client.login()	
-	return 0
 	
 	rcv_thread=thread.start_new_thread(thread_rcv_msg,(s,uid))
 	send_thread=thread.start_new_thread(thread_send_msg,(s,uid))

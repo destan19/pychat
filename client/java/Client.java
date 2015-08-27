@@ -1,5 +1,3 @@
-
-
 import java.net.*;
 import java.nio.*;
 import java.io.*;
@@ -15,9 +13,10 @@ import java.util.List;
 /**
  * Created by derry on 2015/8/21.
  */
-public class Client {
+public class Client{
 	final static byte LOGIN_REQUEST_CMD = 1;
-	
+	final static byte FRIEND_LIST_REQUEST_CMD = 3;
+	final static byte SEND_MSG_CMD = 20;
 	private String host = null;
 	private int port = 80;
 	private static Socket socket;
@@ -33,6 +32,7 @@ public class Client {
 		this.password = password;
 		System.out.println("construct a client.\n");
 	}
+
 	/*
 		return:
 		0: 失败
@@ -71,7 +71,28 @@ public class Client {
 		}
 		
 	}
-		
+	public void send_msg_to_friend(int fid,String msg) throws IOException{
+		String msg_json_str = null;
+		JSONObject obj = new JSONObject();
+		obj.put("uid",this.uid);
+		obj.put("fid",fid);
+		obj.put("msg",msg);
+
+		msg_json_str  = new String(obj.toString());
+		System.out.println("msg json="+msg_json_str);
+		Packet msg_packet=new Packet(msg_json_str.length(),Client.SEND_MSG_CMD,this.uid,msg_json_str);
+		NetHelper.send_packet(this.os,msg_packet);
+	}
+	
+	public void rcv_msg() throws IOException {
+		Packet resp_packet = NetHelper.rcv_packet(this.dis);
+		if ( null == resp_packet) {
+			return;
+		}
+		else {
+			System.out.println("rcv msg:"+resp_packet.getData());
+		}
+	}
 	public int connect_to_server(String host,int port) throws IOException {
 		try {
 			this.socket = new Socket(host, port);  
@@ -161,7 +182,7 @@ public class Client {
 		}
 	}
 	
-    public static void main(String []args) {
+    public static void main(String []args) throws InterruptedException{
 
 		Client client = new Client(101,123456);
 		try {
@@ -173,25 +194,32 @@ public class Client {
 		}
 
 		try {
-			if  (!client.login()) 
+			if  ( 0 == client.login()) 
 				return;
-			
+			Chat chat = new Chat(client,102);
+			chat.start();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("network not ok.");
-			return;
+			try {
+				client.disconnect_server();
+			}
+			catch (IOException e2) {
+				e2.printStackTrace();
+			}
+			return ;
 		}
 
 		while(true) {
 			try {
-				client.disconnect_server();
-				break;
+				client.rcv_msg();
 			}
 			catch (IOException e) {
-				break;
+				e.printStackTrace();
 			}
-			
+			Thread.sleep(200);
+			System.out.println("main loop...............");
 		}
 	};
 };
