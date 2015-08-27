@@ -21,6 +21,9 @@ public class Client{
 	final static byte FRIEND_LIST_REQUEST_CMD = 3;
 	final static byte FRIEND_LIST_RESPONSE_CMD = 4;
 	final static byte SEND_MSG_CMD = 20;
+	final static byte MSG_RESPONSE_CMD = 21;
+
+	
 	private String host = null;
 	private int port = 80;
 	private static Socket socket;
@@ -94,6 +97,13 @@ public class Client{
 		}
 	}
 	
+	public void handleFriendListResponse(Packet packet) {
+		System.out.println("friendlist="+packet.getData());
+	}
+	
+	public void handleReceivedMsg(Packet packet) {
+		System.out.println("recv msg="+packet.getData());
+	}
 	public void sendMsgToFriend(int fid,String msg) throws IOException{
 		String msg_json_str = null;
 		JSONObject obj = new JSONObject();
@@ -107,14 +117,16 @@ public class Client{
 		NetHelper.send_packet(this.os,msg_packet);
 	}
 	
-	public void rcvMsg() throws IOException {
-		Packet resp_packet = NetHelper.rcv_packet(this.dis);
-		if ( null == resp_packet) {
-			return;
-		}
-		else {
-			System.out.println("rcv msg:"+resp_packet.getData());
-		}
+	public void getFriendList() throws IOException {
+		String req_str = null;
+		JSONObject req_json = new JSONObject();
+	
+		req_json.put("uid",this.uid);
+		
+		req_str  = new String(req_json.toString());
+		System.out.println("login json="+req_str);
+		Packet req_packet =new Packet(req_str.length(),Client.FRIEND_LIST_REQUEST_CMD,this.uid,req_str);
+		NetHelper.send_packet(this.os,req_packet);
 	}
 	/*
 		收到消息后处理
@@ -126,6 +138,10 @@ public class Client{
 				handleLoginResponse(packet);
 				break;
 			case FRIEND_LIST_RESPONSE_CMD:
+				handleFriendListResponse(packet);
+				break;
+			case SEND_MSG_CMD:
+				handleReceivedMsg(packet);
 				break;
 			default:
 				System.out.println("invalid msg. cmd="+packet.getCmd());
@@ -243,6 +259,7 @@ public class Client{
 			}
 			else {
 				System.out.println("client "+client.uid + " login to server success.");
+				client.getFriendList();
 			}
 		}
 		catch (IOException e) {
