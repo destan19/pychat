@@ -9,37 +9,54 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by derry on 2015/8/21.
  */
 public class Client{
 	final static byte LOGIN_REQUEST_CMD = 1;
+	final static byte LOGIN_RESPONSE_CMD = 2;
 	final static byte FRIEND_LIST_REQUEST_CMD = 3;
+	final static byte FRIEND_LIST_RESPONSE_CMD = 4;
 	final static byte SEND_MSG_CMD = 20;
 	private String host = null;
 	private int port = 80;
 	private static Socket socket;
-	private OutputStream os;
-	private InputStream is;
-	private DataInputStream dis;
-	private DataOutputStream dos;
+	public  OutputStream os;
+	public  InputStream is;
+	public DataInputStream dis;
+	public DataOutputStream dos;
 	private int uid;
 	private int password;
+	private List<Integer> friend_list =  null;
+	private Queue<Packet> pkt_queue = null;
+	private int login_status ; /*登录状态*/
 	
 	public Client(int uid,int password) {
 		this.uid = uid;
 		this.password = password;
+		this.login_status = -1;
+		this.pkt_queue = new LinkedList<Packet>();
 		System.out.println("construct a client.\n");
 	}
-
+	public Packet popPacket() {
+		return this.pkt_queue.remove();
+	}
+	public void addPacket(Packet packet) {
+		this.pkt_queue.add(packet);
+	}
+	public boolean pktEmpty() {
+		return this.pkt_queue.isEmpty();
+	}
 	/*
 		return:
 		0: 失败
 		1: 成功
 		-1:网络错误
 	*/
-	public int login() throws IOException{
+	public int login() throws IOException,InterruptedException{
 		int ret = 0;
 		String login_json_str = null;
 		JSONObject login_json = new JSONObject();
@@ -53,25 +70,31 @@ public class Client{
 		ret = NetHelper.send_packet(this.os,login_packet);
 		if ( 0 == ret ) 
 			return 0;
-		
-		Packet resp_packet = NetHelper.rcv_packet(this.dis);
-		if ( null == resp_packet) {
-			return -1;
-		}
-		else {
-			resp_json = new JSONObject(resp_packet.getData());
-			if (resp_json.getString("login_status").equals("success")) {
-				System.out.println("login ............success.");
+		while (true) {
+			Thread.sleep(100);
+			if (this.login_status == 1) {
 				return 1;
 			}
-			else  {
-				System.out.println("login ............fail.");
+			else {
 				return 0;
 			}
 		}
 		
 	}
-	public void send_msg_to_friend(int fid,String msg) throws IOException{
+	
+	public void handleLoginResponse(Packet packet) {
+		JSONObject resp_json = new JSONObject(packet.getData());
+		if (resp_json.getString("login_status").equals("success")) {
+			System.out.println("login ............success.");
+			this.login_status = 1;
+		}
+		else  {
+			System.out.println("login ............fail.");
+			this.login_status = 0;
+		}
+	}
+	
+	public void sendMsgToFriend(int fid,String msg) throws IOException{
 		String msg_json_str = null;
 		JSONObject obj = new JSONObject();
 		obj.put("uid",this.uid);
@@ -84,7 +107,7 @@ public class Client{
 		NetHelper.send_packet(this.os,msg_packet);
 	}
 	
-	public void rcv_msg() throws IOException {
+	public void rcvMsg() throws IOException {
 		Packet resp_packet = NetHelper.rcv_packet(this.dis);
 		if ( null == resp_packet) {
 			return;
@@ -93,7 +116,24 @@ public class Client{
 			System.out.println("rcv msg:"+resp_packet.getData());
 		}
 	}
-	public int connect_to_server(String host,int port) throws IOException {
+	/*
+		收到消息后处理
+	*/
+	public void msgHandle(Packet packet) throws IOException {
+		System.out.println("handle msg cmd:"+packet.getCmd());
+		switch (packet.getCmd()) {
+			case LOGIN_RESPONSE_CMD:
+				handleLoginResponse(packet);
+				break;
+			case FRIEND_LIST_RESPONSE_CMD:
+				break;
+			default:
+				System.out.println("invalid msg. cmd="+packet.getCmd());
+		}
+	}
+
+			
+	public int connectToServer(String host,int port) throws IOException {
 		try {
 			this.socket = new Socket(host, port);  
 			this.os = this.socket.getOutputStream();
@@ -107,7 +147,7 @@ public class Client{
 		}
 		return 1;
 	}
-	public int disconnect_server() throws IOException {
+	public int disconnectServer() throws IOException {
 		try {
 			this.socket.close();
 		}
@@ -186,24 +226,30 @@ public class Client{
 
 		Client client = new Client(101,123456);
 		try {
-			client.connect_to_server("192.168.66.134",1088);
+			client.connectToServer("192.168.66.134",1088);
 		}
 		catch (IOException e) {
 			System.out.println("connect to server error.\n");
 			return;
 		}
-
+		RecvMsgThread rcv_thread = new RecvMsgThread(client);
+		MsgDistributeThread distribute_thread = new MsgDistributeThread(client);
+		rcv_thread.start();
+		distribute_thread.start();
+		
 		try {
-			if  ( 0 == client.login()) 
+			if  ( 0 == client.login()) {
 				return;
-			Chat chat = new Chat(client,102);
-			chat.start();
+			}
+			else {
+				System.out.println("client "+client.uid + " login to server success.");
+			}
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("network not ok.");
 			try {
-				client.disconnect_server();
+				client.disconnectServer();
 			}
 			catch (IOException e2) {
 				e2.printStackTrace();
@@ -212,14 +258,7 @@ public class Client{
 		}
 
 		while(true) {
-			try {
-				client.rcv_msg();
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			Thread.sleep(200);
-			System.out.println("main loop...............");
+			Thread.sleep(2000);
 		}
 	};
 };

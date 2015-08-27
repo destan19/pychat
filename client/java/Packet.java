@@ -25,6 +25,12 @@ public class Packet{
 	public String getData() {
 		return this.data;
 	}
+	public byte getCmd() {
+		return this.cmd;
+	}
+	public int getUid() {
+		return this.uid;
+	}
 	byte[] getByteData() {
 		int p = 0;
 		byte []int_bytes= new byte[4];
