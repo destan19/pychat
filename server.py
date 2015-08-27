@@ -122,7 +122,7 @@ def chat_msg_handle(con,content_json):
 		res_obj['status']='fail'
 		res_obj['reson']='friend is not online'
 	else:
-		msg_packet=wrap_packet(f_con,0,22,data,len(data))	
+		msg_packet=wrap_packet(f_con,0,20,data,len(data))	
 		mq[f_con].put(msg_packet)
 		if f_con not in outputs:
 			outputs.append(f_con)
