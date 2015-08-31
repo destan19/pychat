@@ -233,7 +233,7 @@ def main():
 				print s.getpeername(),'queue empty'
 				outputs.remove(s)
 			else:
-				print '###########send ',repr(msg)
+				#print '###########send ',repr(msg)
 				s.send(msg)
 		for s in ex:
 			print 'exception on',s.getpeername()
