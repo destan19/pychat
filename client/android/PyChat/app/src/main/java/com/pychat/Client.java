@@ -1,6 +1,8 @@
 package com.pychat;
 import android.app.Activity;
-
+import android.os.Message;
+import com.pychat.MainActivity;
+import java.lang.ref.WeakReference;
 import java.net.*;
 import java.nio.*;
 import java.io.*;
@@ -14,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Queue;
+
 
 /**
  * Created by derry on 2015/8/21.
@@ -39,8 +42,8 @@ public class Client  {
 	public DataOutputStream dos;
 	private int uid;
 	private int password;
-	private List<Integer> friend_list =  null;
-	private Queue<Packet> pkt_queue = new LinkedList<Packet>();;
+	private List<Integer> friend_list =  new ArrayList<Integer>();
+	private Queue<Packet> pkt_queue = new LinkedList<Packet>();
 	private int login_status = -1 ; /*登录状态*/
 	RecvMsgThread rcv_thread ;
 	MsgDistributeThread distribute_thread;
@@ -72,6 +75,7 @@ public class Client  {
                 break;
             case ACTIVITY_MAIN:
                 this.mainActivity = (MainActivity)activity;
+
                 break;
             default:
                 break;
@@ -100,15 +104,13 @@ public class Client  {
 		if ( 0 == ret ) 
 			return 0;
 		while (true) {
-			Thread.sleep(100);
-			if (this.login_status == 1) {
-				return 1;
-			}
-			else {
-				return 0;
-			}
-		}
-		
+            Thread.sleep(100);
+            if (this.login_status == 1) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
 	}
 	
 	public void handleLoginResponse(Packet packet) throws  JSONException{
@@ -122,13 +124,35 @@ public class Client  {
 			this.login_status = 0;
 		}
 	}
-	
-	public void handleFriendListResponse(Packet packet) {
-		System.out.println("friendlist="+packet.getData());
+    /**
+     接收来自服务器的好友列表，设置client的friend list，在MainActivity中
+     通过遍历friend list来展现好友列表
+     */
+	public void handleFriendListResponse(Packet packet)  {
+
+		if (mainActivity == null) {
+			return ;
+		}
+        try {
+            JSONObject resp_json = new JSONObject(packet.getData());
+            JSONArray arr_obj = new JSONArray();
+            arr_obj = resp_json.getJSONArray("list");
+            List<JSONObject> list = new ArrayList<JSONObject>();
+            for (int i = 0; i < arr_obj.length(); i++) {
+                JSONObject object = (JSONObject) arr_obj.opt(i);
+                list.add(object);
+                friend_list.add(object.getInt("loginid"));
+            }
+        }catch (JSONException e) {
+            return;
+        }
+        mainActivity.getHandler().sendEmptyMessage(CmdConstant.FRIEND_LIST_RESPONSE);
+        // 为什么直接调用handleFriendList只能设置一个view?
+		//mainActivity.handleFriendList(packet);
 	}
 	
 	public void handleReceivedMsg(Packet packet) {
-		System.out.println("recv msg="+packet.getData());
+		System.out.println("recv msg=" + packet.getData());
 	}
 	public void sendMsgToFriend(int fid,String msg) throws IOException,JSONException{
 		String msg_json_str = null;
@@ -142,15 +166,20 @@ public class Client  {
 		Packet msg_packet=new Packet(msg_json_str.length(),Client.SEND_MSG_CMD,this.uid,msg_json_str);
 		NetHelper.send_packet(this.os,msg_packet);
 	}
-	
-	public void getFriendList() throws IOException,JSONException {
+	public List<Integer> getFriendList() {
+        return this.friend_list;
+    }
+	public void requestFriendList() throws IOException {
 		String req_str = null;
-		JSONObject req_json = new JSONObject();
-	
-		req_json.put("uid",this.uid);
-		
-		req_str  = new String(req_json.toString());
-		System.out.println("login json="+req_str);
+        try {
+            JSONObject req_json = new JSONObject();
+
+            req_json.put("uid", this.uid);
+
+            req_str = new String(req_json.toString());
+        }catch (JSONException e){
+            return;
+        }
 		Packet req_packet =new Packet(req_str.length(),Client.FRIEND_LIST_REQUEST_CMD,this.uid,req_str);
 		NetHelper.send_packet(this.os,req_packet);
 	}
@@ -282,7 +311,7 @@ public class Client  {
 		MsgDistributeThread distribute_thread = new MsgDistributeThread(client);
 		rcv_thread.start();
 		distribute_thread.start();
-		
+
 		try {
 			if  ( 0 == client.login()) {
 				return;
