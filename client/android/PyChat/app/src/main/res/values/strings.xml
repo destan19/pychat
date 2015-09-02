@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PyChat</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="login">login</string>
+    <string name="cancel">cancel</string>
+    <string name="login_success">login success</string>
+    <string name="login_fail">login fail</string>
+    <string name="test">test</string>
+</resources>
