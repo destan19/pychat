@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lv_friend = (ListView)findViewById(R.id.lv_friend);
-
+        lv_friend.setOnItemClickListener(new MyItemClickClickListener());
         client = Client.getInstance();
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1);
         lv_friend.setAdapter(adapter);
@@ -60,6 +61,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         };
+
         client.registerActivity(Client.ACTIVITY_MAIN,this);
         try {
             client.requestFriendList();
@@ -70,6 +72,27 @@ public class MainActivity extends ActionBarActivity {
     public Handler getHandler() {
         return this.handler;
     }
+
+
+private class MyItemClickClickListener implements AdapterView.OnItemClickListener {
+    public MyItemClickClickListener() {
+        // TODO Auto-generated constructor stub
+    }
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+        // TODO Auto-generated method stub
+        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+        Bundle mBundle = new Bundle();
+
+        String fid = lv_friend.getItemAtPosition(arg2).toString();
+        mBundle.putInt("fid",Integer.valueOf(fid));
+        //ArrayAdapter<String> adapter2=arg0.getAdapter();
+    //    Map<String, String> map=(Map<String, String>) adapter.getItem(arg2);
+        intent.putExtras(mBundle);
+        startActivity(intent);
+    }
+}
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -96,7 +119,7 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 }
