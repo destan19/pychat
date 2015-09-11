@@ -25,11 +25,6 @@ user_dict={}
 def load_conf():
 	cp=ConfigParser.ConfigParser()
 	cp.read("server.conf")
-#	secs=cp.sections()
-#	print "setions:",secs
-#	server_items=cp.items('server')
-#	print 'server items=',server_items
-#	server_opts=cp.options('server');
 	c_host=cp.get("server","host")
 	c_port=cp.get("server","port")
 	global host,port
