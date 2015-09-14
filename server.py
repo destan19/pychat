@@ -64,12 +64,14 @@ def friend_list_request_handle(con,content_json):
 	num=0
 	user=User(content_json['uid'])
 	friend_list=user.get_friend_list()
-	friend_obj={}
+	
+	print 'friend_list=',friend_list
 	obj['list']=[]
 	for i,friend_id in enumerate(friend_list):		
+		friend_obj={}
 		num+=1
 		friend=User(friend_id)
-		friend_obj['loginid']=friend.loginid
+		friend_obj['loginid']=i
 		friend_obj['nickname']=friend.nickname
 		friend_obj['address']=friend.address
 		friend_obj['phone_num']=friend.phone_num
@@ -169,6 +171,14 @@ def	user_info_request_handle(con,content_json):
 	res_data=json.dumps(res_obj,indent=4)
 	res_packet=wrap_packet(con,0,10,res_data,len(res_data))
 	return res_packet
+
+def register_request_handle(con,content_json):
+	obj={}
+	res_obj={}
+	uid=content_json['uid']
+	password=content_json['password']
+	mail=content_json['mail']
+	
 	
 def rcv_and_handle_msg(con):
 	handle={
@@ -177,6 +187,7 @@ def rcv_and_handle_msg(con):
 		5:upload_user_image_handle,
 		7:user_image_request_handle,
 		9:user_info_request_handle,
+		11:register_request_handle,
 		20:chat_msg_handle
 		
 	}
