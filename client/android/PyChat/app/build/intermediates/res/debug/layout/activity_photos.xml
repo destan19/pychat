@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/list_divider_color"
+    tools:context="com.pychat.PhotosActivity">
+    <ListView
+        android:id="@+id/lv_content"
+        android:layout_width="fill_parent"
+        android:minHeight="20dp"
+        android:dividerHeight="10dp"
+        android:layout_height="400dp">
+    </ListView>
+    <TextView
+        android:layout_width="fill_parent"
+        android:id="@+id/debug_text"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        android:layout_height="200dp" />
+
+</LinearLayout>
+<!-- From: file:/C:/Users/derry/AndroidStudioProjects/git/pychat/client/android/PyChat/app/src/main/res/layout/activity_photos.xml -->

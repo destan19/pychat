@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-16df55215a7eb2ac280ab25efbf39a17db188e92.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-432e6b19854b6da6d6683f143be402274470a7af.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-d9c6d53743770e8886a8c0ca05d522c96827d7c6.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-9a69d27a61cad3f80f31fde217c95004a528d210.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-a1855b764dd21757e4c903b3b296116ba47cb7a2.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-9433e2ddaa513fa7d0156c469e795210b4954096.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-101ef1d515834b417f4c89ce48c8e4b86ee57a22.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-d906fd5c92d87af8806aa665609c54ada8f1a5df.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-04b91d05eff01e307bc8dabd980085e09df8369a.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-d92cd7266c6f6f4fe34dcc3736462374d4b86c89.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-d182fce3fdffe0b6ec53154df5669e66225c3233.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-7d8622409edb4f4efc99dfa46c7496b7117a8527.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-23a1a7d6de4b4cd4b2a130a27a315fd8545f362d.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-ca8e66e124d334f4ce2a99c32987235064035e7a.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-fb87e99326cd0e76321e31c8514f65af18dfbafc.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-d1e6b78d8ade2978df848f7e84de5a5972a71df0.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-3e4525fbf3f215dc8a5d8c982d4c8629935fa8e2.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-47e6c72e345bb7f1e3e663b10cdffc1a2464cfe8.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\libs\json.org.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9ddc003c078d2fec634af8452d08852617324793">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\json.org-04bcd5906371fd064de93f8cc5d373d0a1b6a327.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-17d428045df04216fe56a73af8a53fae31f284f4.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-b9a595ed4e76a60bbedfe2489bb12602fe08835e.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-165d89c7c671cd73ac49842388e984a7d4aa920b.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-8ddc726386cfac130e7a18f91dde41dec40d469d.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-562906d9a10d0e622ef1bceb643ea0c039d9f8d8.jar" />
+    </item>
+    <item
+        jar="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="565a01f90f1529f73362707c4c185d0623a68782">
+        <dex dex="C:\Users\derry\AndroidStudioProjects\git\pychat\client\android\PyChat\app\build\intermediates\pre-dexed\debug\classes-219108af140d2608cf54a1903fa2f847114926b1.jar" />
+    </item>
+
+</items>

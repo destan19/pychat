@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView android:text=""
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <Button android:text="test1"
+        android:id="@+id/test1"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        />
+    <Button android:text="test2"
+        android:id="@+id/test2"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        />
+    <Button android:text="test3"
+        android:id="@+id/test3"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        />
+    <FrameLayout
+        android:layout_width="200dip"
+        android:layout_height="100dip">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第一层"
+            android:textSize="40sp"
+            android:textColor="#ea00fa"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:text="第二层"
+            android:textColor="#00fe00"/>
+    </FrameLayout>
+<RelativeLayout
+    android:layout_width="300dip"
+    android:layout_height="200dip"
+   >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        android:id="@+id/r_tv1"
+        android:textColor="#ea00fa"
+        android:text="AAA"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/r_tv1"
+        android:textSize="50sp"
+        android:textColor="#0aff00"
+        android:id="@+id/r_tv2"
+        android:text="BBB"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        android:textColor="#1a00fa"
+        android:layout_below="@+id/r_tv2"
+        android:id="@+id/r_tv3"
+        android:text="CCCCCCC"/>
+
+</RelativeLayout>
+
+
+</LinearLayout>
+<!-- From: file:/C:/Users/derry/AndroidStudioProjects/git/pychat/client/android/PyChat/app/src/main/res/layout/activity_test.xml -->

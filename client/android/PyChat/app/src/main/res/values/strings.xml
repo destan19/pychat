@@ -8,4 +8,6 @@
     <string name="login_success">login success</string>
     <string name="login_fail">login fail</string>
     <string name="test">test</string>
+    <string name="title_activity_base_info">BaseInfoActivity</string>
+    <string name="title_activity_photos">PhotosActivity</string>
 </resources>

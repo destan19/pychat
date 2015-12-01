@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:background="@color/list_divider_color"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <!-- name -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/iv_friend_photo"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+            <TextView
+                android:id="@+id/tv_friend_name"
+                android:layout_marginLeft="5dp"
+                android:layout_width="80dp"
+                android:layout_height="fill_parent"
+                android:textColor="@color/blue"
+                android:textSize="15dp"
+
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:singleLine="false"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+        </LinearLayout>
+
+        <!-- button-->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="1px"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:background="@color/white">
+            <ImageView
+                android:id="@+id/iv_comment"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="140dp"
+                />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:textColor="@color/gray"
+                android:text="评论"/>
+
+            <ImageView
+                android:id="@+id/iv_up"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                />
+            <TextView
+                android:layout_width="50dp"
+                android:textColor="@color/gray"
+                android:layout_height="fill_parent"
+
+                android:text="赞"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+<!-- From: file:/C:/Users/derry/AndroidStudioProjects/git/pychat/client/android/PyChat/app/src/main/res/layout/listview_item.xml -->

@@ -21,8 +21,8 @@ public class TestActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-
+        setContentView(R.layout.activity_test2);
+      /*
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         test_view = (TextView)findViewById(R.id.test);
@@ -59,7 +59,7 @@ public class TestActivity extends ActionBarActivity {
           }
         };
 
-        thread.start();
+        thread.start();*/
     }
 
     @Override

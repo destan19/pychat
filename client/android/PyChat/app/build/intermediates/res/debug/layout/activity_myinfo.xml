@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:orientation="vertical">
+    <LinearLayout android:id="@+id/lo_baseinfo"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:layout_marginTop="30dp">
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="fill_parent">
+            <ImageView
+                android:id="@+id/self_photo"
+                android:layout_width="60dp"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+
+        <!-- 昵称-->
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_height="fill_parent">
+            <TextView
+                android:id="@+id/nickname"
+                android:textSize="15dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:text="Derry"
+
+                />
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:text="wei-dxt"
+                />
+        </LinearLayout>
+
+        <!-- 箭头 -->
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_marginLeft="90dp"
+            android:gravity="center"
+            android:layout_height="fill_parent">
+            <ImageView style="@style/img_arrow" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lo_photos"
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:layout_marginTop="30dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/photos"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:text="相册"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lo_mark"
+
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:layout_marginTop="1dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/mark"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:text="收藏"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lo_wallet"
+
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:layout_marginTop="1dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/wallet"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:text="钱包"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lo_face"
+
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:layout_marginTop="15dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/face"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:text="表情"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lo_setting"
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/setting"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:text="设置"
+            />
+    </LinearLayout>
+</LinearLayout>
+<!-- From: file:/C:/Users/derry/AndroidStudioProjects/git/pychat/client/android/PyChat/app/src/main/res/layout/activity_myinfo.xml -->

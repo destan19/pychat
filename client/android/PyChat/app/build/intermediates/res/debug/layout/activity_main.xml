@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+    >
+
+    <ListView
+        android:id="@+id/lv_friend"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false">
+    </ListView>
+    <TextView android:text="init"
+        android:id="@+id/tv_msg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        />
+</LinearLayout><!-- From: file:/C:/Users/derry/AndroidStudioProjects/git/pychat/client/android/PyChat/app/src/main/res/layout/activity_main.xml -->
